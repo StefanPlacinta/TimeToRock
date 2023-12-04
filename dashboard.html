@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       .flex-container {
+            display: flex;
+            justify-content: space-between;
+       }
+       .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Three columns of equal width */
+            gap: 10px; /* Space between grid items */
+            padding: 10px;
+        }
+
+        .container {
+            
+            width: 45%;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #686868;
+            opacity: 0.8;
+            
+        }
+        .form-group {
+           
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #2e2e2e;
+            color: white;
+        }
+        .file-upload {
+            margin-bottom: 20px;
+        }
+
+        .file-upload input[type='file'] {
+            display: none;
+        }
+
+        .file-upload label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 1.5px solid #ffffff;
+            color: #ffffff;
+            border-radius: 0px;
+            cursor: pointer;
+        }
+
+        .file-upload label:hover {
+            background-color: gray;
+        }
+
+
+        .image-preview {
+            margin-top: 15px;
+            
+            padding: 5px;
+            display: none; /* Initially hide the preview */
+        }
+
+        .image-preview img {
+            width: 100%;
+            max-width: 300px; /* Adjust as needed */
+            height: auto;
+        }
+        .image-size-warning{
+            font-family: 'Poppins', sans-serif;
+            color: red;
+            display: none;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            display: inline-block;
+            padding: 8px 35px;
+            background-color: transparent;
+            border: 1.5px solid #ffffff;
+            color: #ffffff;
+            border-radius: 0px;
+            -webkit-transition: -webkit-transform 0.3s;
+            transition: -webkit-transform 0.3s;
+            transition: transform 0.3s;
+            transition: transform 0.3s, -webkit-transform 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 30px;
+            margin-top: 35px;
+            
+        }
+        input[type="submit"]:hover {
+            color: black;
+            background-color: white;
+        }
+    </style>
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+      
+        <title>Time to Rock Dashboard</title>
+      
+        <!-- slider stylesheet -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+      
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+      
+        <!-- fonts style -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="css/responsive.css" rel="stylesheet" />
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      </head>
+
+      <body>
+        <div class="hero_area" style=" background-image: url(../images/bg_dash.png);background-size:fill; background-attachment: fixed; height: 150vh;">
+          <!-- header section strats -->
+          <header class="header_section" >
+            <div class="container-fluid" >
+              <nav class="navbar navbar-expand-lg custom_nav-container " style="position: fixed;" >
+                <a class="navbar-brand" href="index.html">
+                  <span>
+                    <img src="images/ttrlogo.png" alt="", style="width:100px; height: 50px;"  >
+                  </span>
+                </a>
+                
+               
+                <button class="d-flex ml-auto flex-column flex-lg-row align-items-center" type="button" style="background-color: transparent; border:0px">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Acasă<span class="sr-only">(current)</span></a>            
+                    </ul>
+               
+                </button> 
+              </nav>
+            </div>
+          </header>
+          <!-- end header section -->
+          <!-- slider section -->
+            <div class="grid-container">
+                <div class="container" style="margin-top: 100px; margin-left: 40px; width: 1000px;">
+                    
+                    <h1 style="margin-bottom: 20px;"><b>ADAUGĂ UN EVENIMENT</b></h1>
+                    <form action="submit_form.php" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title"><b>Titlu:</b></label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="content"><b>Descriere/data:</b></label>
+                            <textarea id="content" name="content" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group file-upload">
+                            <label for="uploadfile"><b>Imagine:</b></label>
+                            <input type="file" id="uploadfile" name="uploadfile" value=""/>
+                            <span id="file-chosen" class="file-name">Niciun fișier selectat<p>*Dimensiunea imaginii trebuie să fie de 1080x1080 pixeli pentru a putea fi încărcată</p></span>
+                            
+                        </div>
+                        <div class="image-preview" id="image-preview">
+                            <img src="" alt="Image Preview">
+                        </div>
+
+                        <div class="image-size-warning" id="image-size-warning" >
+                            Dimensiunea imaginii nu este de 1080x1080 pixeli!
+                        </div>
+
+                        <input type="submit" name="upload" value="ADAUGĂ"> 
+                    </form>
+                </div>
+                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            
+                <div class="flex-column">
+                    
+                    <div class="container" style="margin-top: 100px; margin-left: 10px;margin-right: 10px; width: 700px; height:300px ;">
+                        <div id="postCountSection">
+                            <h3>Numărul de evenimente: </h3>
+                            <h3><span id="postCount">Loading...</span></h3>
+                        </div>
+                    </div>
+                    
+                    <div class="container" style=" margin-top: 15px; ; margin-left: 15px; width: 700px; height:400px;background-color: white;opacity: 0.6;font-weight: bold;">
+                    
+                        <div style="width: 600px; height: 500px; margin: auto;">
+                            <canvas id="trafficChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="grid-container">
+                <div class="container" style="margin-top: 10px; margin-left: 40px; width: 1000px;">
+                    
+                    <h1 style="margin-bottom: 20px;"><b>ȘTERGE UN EVENIMENT</b></h1>
+                    <form action="delete_post.php" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="post_id"><b>ID:</b></label>
+                            <input style="text-align: center;" type="text" id="post_id" name="post_id" required>
+                        </div>
+                        
+                        <input type="submit"  value="ȘTERGE"> 
+                    </form>
+                </div>
+
+
+
+            </div>
+          <!-- end slider section -->
+        </div>
+        
+      
+        
+      
+      
+        <script>
+            const actualBtn = document.getElementById('uploadfile');
+            const fileChosen = document.getElementById('file-chosen');
+            const imagePreview = document.getElementById('image-preview');
+            const previewImage = imagePreview.querySelector('img');
+            const imageSizeWarning = document.getElementById('image-size-warning');
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            
+            const trafficChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Visits',
+                    data: [120, 190, 300, 500, 200, 300, 400],
+                    backgroundColor: 'rgba(0, 23, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+             actualBtn.addEventListener('change', function() {
+                 const file = this.files[0];
+                 if (file) {
+                     const reader = new FileReader();
+                     reader.onload = function(e) {
+                         const img = new Image();
+                         img.onload = function() {
+                             // Check if image dimensions are 1080x1080
+                             if (img.width === 1080 && img.height === 1080) {
+                                 previewImage.src = e.target.result;
+                                 imagePreview.style.display = 'block';
+                                 imageSizeWarning.style.display = 'none';
+                                 fileChosen.textContent = file.name;
+                             } else {
+                                 imagePreview.style.display = 'none';
+                                 imageSizeWarning.style.display = 'block';
+                                 fileChosen.textContent = 'No file chosen';
+                             }
+                         };
+                         img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    fileChosen.textContent = 'No file chosen';
+                    imagePreview.style.display = 'none';
+                    imageSizeWarning.style.display = 'none';
+                }
+            });
+
+            
+            
+            async function fetchPostCount() {
+            try {
+                const response = await fetch('/api/postcount');
+                const data = await response.json();
+                document.getElementById('postCount').textContent = data.count;
+            } catch (error) {
+                console.error('Error fetching post count:', error);
+                document.getElementById('postCount').textContent = 'Unavailable';
+            }
+        }
+
+        fetchPostCount();
+        </script>
+      
+      </body>
+
+      
+
+</html>
